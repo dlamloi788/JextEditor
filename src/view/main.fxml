@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.MainController"
+      prefHeight="400.0" prefWidth="600.0"
+      fx:id="containerAp"
+        >
+
+    <MenuBar fx:id="fileMb" useSystemMenuBar="true">
+        <Menu text="File">
+            <MenuItem fx:id="newMi" text="New..." onAction="#handleNew"/>
+            <MenuItem fx:id="openMi" text="Open..." onAction="#handleOpen"/>
+            <MenuItem fx:id="closeMi" text="Close..." onAction="#handleClose"/>
+        </Menu>
+    </MenuBar>
+
+    <TabPane fx:id="filesTp">
+        <Tab text="HOME" closable="true">
+            <fx:include source="template.fxml"/>
+        </Tab>
+    </TabPane>
+
+
+
+
+
+
+
+
+
+
+
+</VBox>
