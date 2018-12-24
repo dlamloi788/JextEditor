@@ -1,21 +1,20 @@
-<?import javafx.scene.layout.VBox?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextArea?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
 <?import javafx.geometry.Insets?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="controller.TemplateController"
-      prefHeight="400.0" prefWidth="600.0"
-      fx:id="containerAp"
-        >
+      prefHeight="400.0" prefWidth="600.0">
 
-    <TextArea VBox.vgrow="ALWAYS">
+    <TextArea VBox.vgrow="ALWAYS" fx:id="textTa">
         <VBox.margin>
-            <Insets top="10" bottom="10" right="10" left="10"/>
+            <Insets topRightBottomLeft="10"/>
         </VBox.margin>
     </TextArea>
-
-
-
 
 </VBox>

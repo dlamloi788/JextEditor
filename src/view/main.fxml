@@ -16,17 +16,14 @@
 
     <MenuBar fx:id="fileMb" useSystemMenuBar="true">
         <Menu text="File">
-            <MenuItem fx:id="newMi" text="New..." onAction="#handleNew"/>
-            <MenuItem fx:id="openMi" text="Open..." onAction="#handleOpen"/>
-            <MenuItem fx:id="closeMi" text="Close..." onAction="#handleClose"/>
+            <MenuItem fx:id="newMi" text="New" onAction="#handleNew"/>
+            <MenuItem fx:id="openMi" text="Open" onAction="#handleOpen"/>
+            <MenuItem fx:id="closeMi" text="Close" onAction="#handleClose"/>
+            <MenuItem fx:id="saveMi" text="Save"  onAction="#handleSave"/>
         </Menu>
     </MenuBar>
 
-    <TabPane fx:id="filesTp">
-        <Tab text="HOME" closable="true">
-            <fx:include source="template.fxml"/>
-        </Tab>
-    </TabPane>
+    <TabPane fx:id="filesTp"/>
 
 
 
