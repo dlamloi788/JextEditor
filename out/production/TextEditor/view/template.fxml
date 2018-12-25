@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
-<?import org.fxmisc.richtext.GenericStyledArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import org.fxmisc.richtext.CodeArea?>
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="controller.TemplateController"
-      prefHeight="10000" prefWidth="10000"
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<VBox prefHeight="10000.0" prefWidth="10000.0"
+      xmlns="http://javafx.com/javafx/8.0.121"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controller.TabController"
       fx:id="rootVb"
-        >
+    >
 
-    <CodeArea fx:id="textCa" VBox.vgrow="ALWAYS">
+
+    <CodeArea fx:id="codeCa" VBox.vgrow="ALWAYS">
         <VBox.margin>
-            <Insets topRightBottomLeft="10"/>
+            <Insets topRightBottomLeft="10" />
         </VBox.margin>
-
     </CodeArea>
 
-    <HBox fx:id="searchbox" VBox.vgrow="ALWAYS" alignment="BOTTOM_CENTER" maxHeight="30" />
+    <HBox fx:id="searchBar" maxHeight="50" VBox.vgrow="ALWAYS" spacing="10" alignment="CENTER_LEFT">
+        <padding>
+            <Insets topRightBottomLeft="10"/>
+        </padding>
+        <TextField fx:id="searchTf" HBox.hgrow="ALWAYS" />
+        <Button fx:id="findNextBtn" text="Find Next"/>
+    </HBox>
 
 
 </VBox>

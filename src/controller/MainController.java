@@ -20,6 +20,7 @@ import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
 import org.fxmisc.richtext.model.Paragraph;
 import org.reactfx.collection.LiveList;
+import view.CustomTab;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -72,8 +73,7 @@ public class MainController extends Controller<TextStats> {
 
 
     public void handleNew(ActionEvent actionEvent) throws IOException {
-        Tab tab = new Tab("untitled");
-        tab.setContent(FXMLLoader.load(getClass().getResource("/view/template.fxml")));
+        CustomTab tab = new CustomTab("untitled");
         filesTp.getTabs().add(tab);
         filesTp.getSelectionModel().select(tab);    
     }
@@ -113,4 +113,9 @@ public class MainController extends Controller<TextStats> {
         }
 
      }
+
+    public void handleFind(ActionEvent actionEvent) {
+        CustomTab currentTab = (CustomTab) filesTp.getSelectionModel().getSelectedItem();
+        //currentTab.showFindBar();
+    }
 }
