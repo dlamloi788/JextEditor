@@ -21,16 +21,15 @@
             <MenuItem fx:id="closeMi" text="Close" onAction="#handleClose"/>
             <MenuItem fx:id="saveMi" text="Save"  onAction="#handleSave"/>
         </Menu>
+        <Menu text="Edit">
+            <MenuItem fx:id="findMi" text="Find" onAction=""
+
+
+
+        </Menu>
     </MenuBar>
 
     <TabPane fx:id="filesTp"/>
-
-
-
-
-
-
-
 
 
 

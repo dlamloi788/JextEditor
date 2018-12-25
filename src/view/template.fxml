@@ -7,14 +7,23 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
+<?import org.fxmisc.richtext.GenericStyledArea?>
+<?import org.fxmisc.richtext.CodeArea?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      prefHeight="400.0" prefWidth="600.0">
+      fx:controller="controller.TemplateController"
+      prefHeight="10000" prefWidth="10000"
+      fx:id="rootVb"
+        >
 
-    <TextArea VBox.vgrow="ALWAYS" fx:id="textTa">
+    <CodeArea fx:id="textCa" VBox.vgrow="ALWAYS">
         <VBox.margin>
             <Insets topRightBottomLeft="10"/>
         </VBox.margin>
-    </TextArea>
+
+    </CodeArea>
+
+    <HBox fx:id="searchbox" VBox.vgrow="ALWAYS" alignment="BOTTOM_CENTER" maxHeight="30" />
+
 
 </VBox>

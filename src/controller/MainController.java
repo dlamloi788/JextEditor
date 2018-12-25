@@ -11,15 +11,23 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import model.TextStats;
+import org.fxmisc.richtext.CodeArea;
+import org.fxmisc.richtext.LineNumberFactory;
+import org.fxmisc.richtext.model.Paragraph;
+import org.reactfx.collection.LiveList;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.security.Key;
+import java.util.Collection;
+import java.util.Iterator;
 
 public class MainController extends Controller<TextStats> {
 
@@ -43,7 +51,7 @@ public class MainController extends Controller<TextStats> {
 
     @FXML
     public void initialize() {
-
+        Tab tab = filesTp.getSelectionModel().getSelectedItem();
         //Sets the key bindings to open a new file
         openMi.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
         //Sets the key bindings to create a new file (opens a new tab)
@@ -59,6 +67,7 @@ public class MainController extends Controller<TextStats> {
                 handleClose(null);
             }
         });
+
     }
 
 
@@ -82,23 +91,26 @@ public class MainController extends Controller<TextStats> {
 
     public void handleSave(ActionEvent actionEvent) {
         Tab tab = filesTp.getSelectionModel().getSelectedItem();
-        TextArea textArea = (TextArea) tab.getContent().lookup("#textTa");
+        CodeArea codeArea = (CodeArea) tab.getContent().lookup("#textCa");
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save As");
         File file = fileChooser.showSaveDialog(stage);
-        ObservableList<CharSequence> paragraphs = textArea.getParagraphs();
+        LiveList<Paragraph<Collection<String>, String, Collection<String>>> paragraphs = codeArea.getParagraphs();
+        Iterator<Paragraph<Collection<String>, String, Collection<String>>> it = paragraphs.iterator();
         if (file != null) {
             try {
                 BufferedWriter writer = new BufferedWriter(new FileWriter(file.getAbsolutePath()));
-                for (CharSequence paragraph : paragraphs) {
-                    writer.append(paragraph);
+                while (it.hasNext()) {
+                    writer.write(it.next().getText());
                     writer.newLine();
                 }
                 writer.flush();
                 writer.close();
+                tab.setText(file.getName());
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+
      }
 }
