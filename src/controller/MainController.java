@@ -43,6 +43,8 @@ public class MainController extends Controller<TextStats> {
     @FXML
     private MenuItem saveMi;
     @FXML
+    private MenuItem findMi;
+    @FXML
     private TextArea textTa;
     @FXML
     private VBox containerAp;
@@ -54,13 +56,21 @@ public class MainController extends Controller<TextStats> {
     public void initialize() {
         Tab tab = filesTp.getSelectionModel().getSelectedItem();
         //Sets the key bindings to open a new file
-        openMi.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
+        openMi.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.SHORTCUT_DOWN));
         //Sets the key bindings to create a new file (opens a new tab)
-        newMi.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
+        newMi.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.SHORTCUT_DOWN));
         //Sets the key bindings to close the current tab
-        closeMi.setAccelerator(new KeyCodeCombination(KeyCode.W, KeyCombination.CONTROL_DOWN));
+        closeMi.setAccelerator(new KeyCodeCombination(KeyCode.W, KeyCombination.SHORTCUT_DOWN));
         //Sets the key bindings to save the file in the currenttab
-        saveMi.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
+        saveMi.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN));
+        //Sets the key bindings to open the search bar
+        findMi.setAccelerator(new KeyCodeCombination(KeyCode.F, KeyCombination.SHORTCUT_DOWN));
+
+        /**
+         * It is also possible to use KeyCombination.CONTROL_DOWN however, this will limit
+         * the key combination to the control button only, which will prevent macs from using
+         * the command key
+         */
 
         //Closes the tab which was middle button clicked
         filesTp.setOnMouseReleased(e -> {
@@ -116,6 +126,6 @@ public class MainController extends Controller<TextStats> {
 
     public void handleFind(ActionEvent actionEvent) {
         CustomTab currentTab = (CustomTab) filesTp.getSelectionModel().getSelectedItem();
-        //currentTab.showFindBar();
+        currentTab.showSearchBar();
     }
 }
