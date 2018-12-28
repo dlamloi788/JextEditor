@@ -126,6 +126,6 @@ public class MainController extends Controller<TextStats> {
 
     public void handleFind(ActionEvent actionEvent) {
         CustomTab currentTab = (CustomTab) filesTp.getSelectionModel().getSelectedItem();
-        currentTab.showSearchBar();
+        currentTab.showFindBar();
     }
 }
