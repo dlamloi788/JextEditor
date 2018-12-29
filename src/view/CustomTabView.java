@@ -56,7 +56,7 @@ public class CustomTabView extends Tab {
         });
         HBox.setHgrow(findTf, Priority.ALWAYS);
         findNextBtn = new Button("Find Next");
-        findNextBtn.setOnAction(e -> handleFind());
+        findNextBtn.setOnAction(e -> controller.find());
         //Create and style the close button
         closeBtn = new Button("\u00D7");
         closeBtn.setFont(Font.font(15));

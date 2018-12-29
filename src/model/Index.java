@@ -5,6 +5,10 @@ public class Index {
     private int start;
     private int end;
 
+    public Index() {
+
+    }
+
     /**
      * Constructor of a new Index instance
      *
@@ -30,5 +34,11 @@ public class Index {
 
     public void setEnd(int end) {
         this.end = end;
+    }
+
+    public void incrementStartAndEnd(int incrementer) {
+        this.start = this.start + incrementer;
+        this.end = this.end + incrementer;
+
     }
 }

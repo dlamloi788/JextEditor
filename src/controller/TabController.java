@@ -51,14 +51,19 @@ public class TabController extends Controller {
             if (index == -1) {
                 return null;
             }
-            Index occurence = new Index(index, index += searchStringLength);
+            int end = index + searchStringLength;
+            Index occurence = new Index(index, end);
+            index += searchStringLength;
+            if (indices.size() >= 1) {
+                Index indexOfLast = indices.get(indices.size() - 1);
+                int incrementer = indexOfLast.getEnd();
+                occurence.incrementStartAndEnd(incrementer);
+            }
             indices.add(occurence);
             text = text.substring(index);
         }
-        return indices;
 
-
-    }
+        return indices;}
 
     private void unhighlightText() {
         tabView.getCodeArea().selectRange(0, 0);
@@ -91,7 +96,7 @@ public class TabController extends Controller {
     }
 
     private String getSearchText() {
-        return tabView.getCodeArea().getText();
+        return tabView.getFindTf().getText();
     }
 
 }
