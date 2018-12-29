@@ -1,36 +1,27 @@
 package controller;
 
 import ViewLoader.Controller;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import model.TextStats;
 import org.fxmisc.richtext.CodeArea;
-import org.fxmisc.richtext.LineNumberFactory;
 import org.fxmisc.richtext.model.Paragraph;
 import org.reactfx.collection.LiveList;
-import view.CustomTab;
+import view.CustomTabView;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.security.Key;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class MainController extends Controller<TextStats> {
+public class MainController extends Controller {
 
     @FXML
     private MenuBar fileMb;
@@ -83,7 +74,7 @@ public class MainController extends Controller<TextStats> {
 
 
     public void handleNew(ActionEvent actionEvent) throws IOException {
-        CustomTab tab = new CustomTab("untitled");
+        CustomTabView tab = new CustomTabView("untitled");
         filesTp.getTabs().add(tab);
         filesTp.getSelectionModel().select(tab);    
     }
@@ -125,7 +116,7 @@ public class MainController extends Controller<TextStats> {
      }
 
     public void handleFind(ActionEvent actionEvent) {
-        CustomTab currentTab = (CustomTab) filesTp.getSelectionModel().getSelectedItem();
-        currentTab.showFindBar();
+        CustomTabView currentTab = (CustomTabView) filesTp.getSelectionModel().getSelectedItem();
+        currentTab.handleFind();
     }
 }
