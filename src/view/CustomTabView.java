@@ -39,6 +39,9 @@ public class CustomTabView extends Tab {
         root.setPrefWidth(10000);
         codeArea = new CodeArea();
         codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
+        codeArea.focusedProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue) controller.resetFind();
+        }));
         VBox.setMargin(codeArea, new Insets(10, 10, 10, 10));
         VBox.setVgrow(codeArea, Priority.ALWAYS);
         findBar = new HBox(10);
@@ -46,14 +49,6 @@ public class CustomTabView extends Tab {
         findBar.setPadding(new Insets(10, 10, 10, 10));
         findBar.setStyle("-fx-background-color: #d2d2d2");
         findTf = new TextField();
-        findTf.textProperty().addListener((observable, oldValue, newValue) -> {
-           /*
-            if (!oldValue.equals(newValue) && indices != null) {
-               indices.clear();
-               isFinding = false;
-               findIndex = 0;
-           } */
-        });
         HBox.setHgrow(findTf, Priority.ALWAYS);
         findNextBtn = new Button("Find Next");
         findNextBtn.setOnAction(e -> controller.find());
