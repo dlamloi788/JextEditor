@@ -25,20 +25,20 @@ public class TabController extends Controller {
 
     public void find() {
         if (!isFinding) {
-            indices = getMatches(getSearchText());
-        }
-        if (indices != null) {
-            System.out.println(indices.size());
-            if (findIndex < indices.size()) {
-                highlightText(indices.get(findIndex++));
-
-            } else if (findIndex >= indices.size()) {
-                findIndex= 0;
+            if (!getSearchText().isEmpty()) {
+                indices = getMatches(getSearchText());
             }
-        } else {
+        }
+        if (indices != null && indices.size() > 0) {
+            System.out.println(indices.size());
+            if (findIndex >= indices.size()) {
+                resetFind();
+            }
+            highlightText(indices.get(findIndex++));
+            } else {
             unhighlightText();
         }
-    }
+      }
 
     @Nullable
     private ArrayList<Index> getMatches(String searchString) {
@@ -46,13 +46,16 @@ public class TabController extends Controller {
         String text = getCodeAreaText();
         int searchStringLength = searchString.length();
         int index = 0;
-        while (index < text.length()) {
+        Index occurence;
+        while (index <= text.length()) {
             index = text.indexOf(searchString);
             if (index == -1) {
                 return null;
             }
             int end = index + searchStringLength;
-            Index occurence = new Index(index, end);
+            occurence = new Index();
+            occurence.setStart(index);
+            occurence.setEnd(end);
             index += searchStringLength;
             if (indices.size() >= 1) {
                 Index indexOfLast = indices.get(indices.size() - 1);
@@ -99,4 +102,8 @@ public class TabController extends Controller {
         return tabView.getFindTf().getText();
     }
 
+    public void resetFind() {
+        findIndex = 0;
+        System.out.println("Index value should be zero: " + findIndex);
+    }
 }
