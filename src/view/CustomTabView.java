@@ -4,11 +4,15 @@ import com.sun.istack.internal.Nullable;
 import controller.TabController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import model.Index;
@@ -30,7 +34,7 @@ public class CustomTabView extends Tab {
     private Button findNextBtn;
     private Button closeBtn;
 
-    private TabController controller = new TabController(this);
+    private TabController controller;
 
     public CustomTabView(String text) throws IOException {
         super(text);
@@ -48,6 +52,8 @@ public class CustomTabView extends Tab {
         findBar.setAlignment(Pos.CENTER_LEFT);
         findBar.setPadding(new Insets(10, 10, 10, 10));
         findBar.setStyle("-fx-background-color: #d2d2d2");
+        findBar.setOnKeyPressed(event -> controller.handleKeyPush(event));
+
         findTf = new TextField();
         HBox.setHgrow(findTf, Priority.ALWAYS);
         findNextBtn = new Button("Find Next");
@@ -63,9 +69,8 @@ public class CustomTabView extends Tab {
 
         findBar.getChildren().addAll(findTf, findNextBtn, closeBtn);
         root.getChildren().addAll(codeArea);
-
-
         this.setContent(root);
+        controller = new TabController(this);
     }
 
     public void handleFind() {
@@ -118,6 +123,10 @@ public class CustomTabView extends Tab {
 
     public void setCloseBtn(Button closeBtn) {
         this.closeBtn = closeBtn;
+    }
+
+    public Scene getScene() {
+        return this.getContent().getScene();
     }
 }
 

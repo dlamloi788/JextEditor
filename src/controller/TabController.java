@@ -2,6 +2,10 @@ package controller;
 
 import ViewLoader.Controller;
 import com.sun.istack.internal.Nullable;
+import javafx.event.Event;
+import javafx.fxml.FXML;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import model.Index;
 import org.fxmisc.richtext.Caret;
 import org.fxmisc.richtext.CaretNode;
@@ -14,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javafx.scene.input.KeyCode;
 
 public class TabController extends Controller {
 
@@ -29,23 +34,14 @@ public class TabController extends Controller {
 
     public TabController(CustomTabView tabView) {
         this.tabView = tabView;
+//        tabView.getFindTf().getScene().setOnKeyPressed(this::handleEnterPush);
     }
 
-    private void addCaret() {
-        CaretNode caret = new CaretNode("caret", tabView.getCodeArea());
-        tabView.getCodeArea().addCaret(caret);
-        caret.moveTo(2, 1);
+    @FXML
+    public void initialize() {
+        tabView.getScene().setOnKeyPressed(this::handleKeyPush);
     }
 
-    private void addSelection() {
-        tabView.getCodeArea().textProperty().addListener(((observable, oldValue, newValue) -> {
-            if (!oldValue.equals(newValue)) {
-
-            }
-
-        }));
-
-    }
 
     public void find() {
         if (!isFinding) {
@@ -141,5 +137,16 @@ public class TabController extends Controller {
     public void resetFind() {
         findIndex = 0;
         System.out.println("Index value should be zero: " + findIndex);
+    }
+
+    public void handleKeyPush(KeyEvent event) {
+        switch (event.getCode()) {
+            case ENTER:
+                find();
+                break;
+            case ESCAPE:
+                hideFindBar();
+                break;
+        }
     }
 }
