@@ -13,11 +13,11 @@ public class Index {
      * Constructor of a new Index instance
      *
      * @param start the starting index of the matched word
-     * @param length the length of the matching word, used to calculate the end index
+     * @param length the end index of the matched word
      */
-    public Index(int start, int length) {
+    public Index(int start, int end) {
        this.start = start;
-       this.end = start + length;
+       this.end = end;
     }
 
     public int getStart() {
