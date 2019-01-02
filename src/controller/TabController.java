@@ -3,9 +3,17 @@ package controller;
 import ViewLoader.Controller;
 import com.sun.istack.internal.Nullable;
 import model.Index;
+import org.fxmisc.richtext.Caret;
+import org.fxmisc.richtext.CaretNode;
+import org.fxmisc.richtext.Selection;
+import org.fxmisc.richtext.SelectionImpl;
+import org.fxmisc.richtext.model.Paragraph;
 import view.CustomTabView;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TabController extends Controller {
 
@@ -21,6 +29,22 @@ public class TabController extends Controller {
 
     public TabController(CustomTabView tabView) {
         this.tabView = tabView;
+    }
+
+    private void addCaret() {
+        CaretNode caret = new CaretNode("caret", tabView.getCodeArea());
+        tabView.getCodeArea().addCaret(caret);
+        caret.moveTo(2, 1);
+    }
+
+    private void addSelection() {
+        tabView.getCodeArea().textProperty().addListener(((observable, oldValue, newValue) -> {
+            if (!oldValue.equals(newValue)) {
+
+            }
+
+        }));
+
     }
 
     public void find() {
@@ -40,6 +64,7 @@ public class TabController extends Controller {
         }
       }
 
+    /**
     @Nullable
     private ArrayList<Index> getMatches(String searchString) {
         ArrayList<Index> indices = new ArrayList<Index>();
@@ -66,7 +91,18 @@ public class TabController extends Controller {
             text = text.substring(index);
         }
 
-        return indices;}
+        return indices;
+    } */
+
+    private ArrayList<Index> getMatches(String searchString) {
+        ArrayList<Index> indices = new ArrayList<Index>();
+        Pattern pattern = Pattern.compile(searchString);
+        Matcher matcher = pattern.matcher(getCodeAreaText());
+        while (matcher.find()) {
+            indices.add(new Index(matcher.start(), matcher.end()));
+        }
+        return indices.size() == 0 ? null : indices;
+    }
 
     private void unhighlightText() {
         tabView.getCodeArea().selectRange(0, 0);
