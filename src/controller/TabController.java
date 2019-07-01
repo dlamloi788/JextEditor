@@ -60,36 +60,6 @@ public class TabController extends Controller {
         }
       }
 
-    /**
-    @Nullable
-    private ArrayList<Index> getMatches(String searchString) {
-        ArrayList<Index> indices = new ArrayList<Index>();
-        String text = getCodeAreaText();
-        int searchStringLength = searchString.length();
-        int index = 0;
-        Index occurence;
-        while (index <= text.length()) {
-            index = text.indexOf(searchString);
-            if (index == -1) {
-                return null;
-            }
-            int end = index + searchStringLength;
-            occurence = new Index();
-            occurence.setStart(index);
-            occurence.setEnd(end);
-            index += searchStringLength;
-            if (indices.size() >= 1) {
-                Index indexOfLast = indices.get(indices.size() - 1);
-                int incrementer = indexOfLast.getEnd();
-                occurence.incrementStartAndEnd(incrementer);
-            }
-            indices.add(occurence);
-            text = text.substring(index);
-        }
-
-        return indices;
-    } */
-
     private ArrayList<Index> getMatches(String searchString) {
         ArrayList<Index> indices = new ArrayList<Index>();
         Pattern pattern = Pattern.compile(searchString);

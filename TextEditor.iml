@@ -25,5 +25,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="richtextfx-fat-0.10.1" level="project" />
   </component>
 </module>
