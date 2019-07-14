@@ -1,24 +1,14 @@
 package controller;
 
 import ViewLoader.Controller;
-import com.sun.istack.internal.Nullable;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.Index;
-import org.fxmisc.richtext.Caret;
-import org.fxmisc.richtext.CaretNode;
-import org.fxmisc.richtext.Selection;
-import org.fxmisc.richtext.SelectionImpl;
-import org.fxmisc.richtext.model.Paragraph;
 import view.CustomTabView;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javafx.scene.input.KeyCode;
 
 public class TabController extends Controller {
 
@@ -34,12 +24,11 @@ public class TabController extends Controller {
 
     public TabController(CustomTabView tabView) {
         this.tabView = tabView;
-//        tabView.getFindTf().getScene().setOnKeyPressed(this::handleEnterPush);
     }
 
     @FXML
     public void initialize() {
-        tabView.getScene().setOnKeyPressed(this::handleKeyPush);
+
     }
 
 
@@ -106,7 +95,6 @@ public class TabController extends Controller {
 
     public void resetFind() {
         findIndex = 0;
-        System.out.println("Index value should be zero: " + findIndex);
     }
 
     public void handleKeyPush(KeyEvent event) {
@@ -119,4 +107,5 @@ public class TabController extends Controller {
                 break;
         }
     }
+
 }

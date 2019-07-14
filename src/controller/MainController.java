@@ -1,7 +1,11 @@
 package controller;
 
 import ViewLoader.Controller;
+import ViewLoader.ViewLoader;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,6 +18,8 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import model.Settings;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.model.Paragraph;
 import org.reactfx.collection.LiveList;
@@ -25,12 +31,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.prefs.Preferences;
 
 public class MainController extends Controller {
 
     final KeyCombination zoomCombination = new KeyCodeCombination(KeyCode.ADD, KeyCombination.SHORTCUT_DOWN);
     final KeyCombination zoomCombination_equal = new KeyCodeCombination(KeyCode.EQUALS, KeyCombination.SHORTCUT_DOWN);
 
+    private IntegerProperty fontSize = new SimpleIntegerProperty(11);
     @FXML
     private MenuBar fileMb;
     @FXML
@@ -44,13 +52,13 @@ public class MainController extends Controller {
     @FXML
     private MenuItem findMi;
     @FXML
+    private MenuItem settingsMi;
+    @FXML
     private TextArea textTa;
     @FXML
     private VBox containerAp;
     @FXML
     private TabPane filesTp;
-
-    private CodeArea currentCodeArea;
 
     @FXML
     public void initialize() {
@@ -64,17 +72,7 @@ public class MainController extends Controller {
         saveMi.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN));
         //Sets the key bindings to open the search bar
         findMi.setAccelerator(new KeyCodeCombination(KeyCode.F, KeyCombination.SHORTCUT_DOWN));
-        //Handles the Ctrl + Plus OR Ctrl + Equal for zoom in
-        containerAp.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
-            if (zoomCombination.match(event) || zoomCombination_equal.match(event)) {
-                System.out.printf("ZOOM!");
-            }
-        });
-        /**
-         * It is also possible to use KeyCombination.CONTROL_DOWN however, this will limit
-         * the key combination to the control button only, which will prevent macs from using
-         * the command key
-         */
+
 
         //Closes the tab which was middle button clicked
         filesTp.setOnMouseReleased(e -> {
@@ -83,19 +81,13 @@ public class MainController extends Controller {
             }
         });
 
-        //Observe the user changing to different tabs
-        filesTp.getSelectionModel().selectedIndexProperty().addListener((o, oldValue, newValue) -> {
-            //Once the user changes to a new tab, set the current code area to the code area in the
-            //selected tab
-            if (newValue.intValue() > -1) {
-                currentCodeArea = (CodeArea) filesTp.getTabs().get(newValue.intValue()).getContent().lookup("#textCa");
-            }
+        fontSize.addListener((observable, oldValue, newValue) -> {
+            //changeFontForAll(newValue.intValue());
         });
-
     }
 
     public void handleNew(ActionEvent actionEvent) throws IOException {
-        CustomTabView tab = new CustomTabView("untitled");
+        CustomTabView tab = new CustomTabView("untitled", fontSize.get());
         filesTp.getTabs().add(tab);
         filesTp.getSelectionModel().select(tab);
     }
@@ -111,7 +103,9 @@ public class MainController extends Controller {
         filesTp.getTabs().remove(tab);
     }
 
+
     public void handleSave(ActionEvent actionEvent) {
+        /*
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save As");
         File file = fileChooser.showSaveDialog(stage);
@@ -130,12 +124,16 @@ public class MainController extends Controller {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-
+        } */
      }
 
     public void handleFind(ActionEvent actionEvent) {
         CustomTabView currentTab = (CustomTabView) filesTp.getSelectionModel().getSelectedItem();
         currentTab.handleFind();
     }
+
+    public void handleSettings(ActionEvent actionEvent) throws IOException {
+        ViewLoader.load(Settings.getInstance(), "/view/settings.fxml", "Settings", new Stage());
+    }
+
 }

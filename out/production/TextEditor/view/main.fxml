@@ -20,6 +20,7 @@
             <MenuItem fx:id="openMi" text="Open" onAction="#handleOpen"/>
             <MenuItem fx:id="closeMi" text="Close" onAction="#handleClose"/>
             <MenuItem fx:id="saveMi" text="Save"  onAction="#handleSave"/>
+            <MenuItem fx:id="settingsMi" text="Settings" onAction="#handleSettings"/>
         </Menu>
         <Menu text="Edit">
             <MenuItem fx:id="findMi" text="Find" onAction="#handleFind"/>

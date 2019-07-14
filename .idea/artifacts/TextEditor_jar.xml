@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TextEditor:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TextEditor_jar</output-path>
+    <root id="archive" name="TextEditor.jar">
+      <element id="module-output" name="TextEditor" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/richtextfx-fat-0.10.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

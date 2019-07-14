@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<GridPane xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.SettingsController"
+      vgap="10" hgap="10">
+    <padding>
+        <Insets topRightBottomLeft="10"/>
+    </padding>
+
+    <Label text="Default font size" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <TextField fx:id="defaultFontSizeTf" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="35"/>
+    <Label text="px" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+    <Label text="Minimum font size" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <TextField fx:id="minimumFontSizeTf" GridPane.rowIndex="1" GridPane.columnIndex="1"  prefWidth="35"/>
+    <Label text="px" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+    <Label text="Maximum font size" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <TextField fx:id="maximumFontSizeTf" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="35"/>
+    <Label text="px" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+
+</GridPane>
